@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#75946f">
+<meta name="description" content="Nosso Enxoval — David & Bruna">
+<link rel="manifest" href="./manifest.json">
+<title>Nosso Enxoval — David & Bruna</title>
+<style>
+:root{
+  --bg:#f6f2e9;--card:#fffdf8;--ink:#263229;--muted:#748076;--sage:#78936f;
+  --sage2:#dfe9db;--sage3:#edf3ea;--peach:#f0d8c7;--line:#e7e3d9;--danger:#b95d5d;
+  --shadow:0 12px 34px rgba(45,58,47,.08);--radius:24px;--nav:76px
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.app{max-width:1180px;margin:auto;padding:18px 16px calc(var(--nav) + 28px)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:var(--sage2);display:grid;place-items:center;font-size:26px;box-shadow:var(--shadow)}
+h1{font-size:clamp(24px,4vw,38px);line-height:1;margin:0}.subtitle{color:var(--muted);font-size:14px;margin-top:5px}.ghost,.iconbtn,.primary,.danger,.chip{border:0;border-radius:16px}.ghost,.iconbtn{background:var(--card);color:var(--ink);box-shadow:0 2px 12px rgba(45,58,47,.05)}.iconbtn{width:44px;height:44px}.primary{background:var(--sage);color:white;padding:12px 16px;font-weight:700}.danger{background:#f9e5e5;color:var(--danger);padding:10px 13px}.ghost{padding:11px 14px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.grid{display:grid;gap:14px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:14px 0}.stat{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow)}.stat b{font-size:clamp(22px,4vw,34px);display:block;margin-top:5px}.stat small{color:var(--muted)}
+.progress-card{background:linear-gradient(135deg,var(--sage2),var(--card));border:1px solid #d8e3d4;border-radius:26px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}.progress-track{height:12px;background:white;border-radius:99px;overflow:hidden;margin-top:12px}.progress-fill{height:100%;background:var(--sage);border-radius:99px}
+.toolbar{display:grid;grid-template-columns:1fr auto auto;gap:10px;margin:16px 0}.search{position:relative}.search input{width:100%;padding:14px 16px 14px 44px;background:var(--card);border:1px solid var(--line);border-radius:18px;outline:none}.search span{position:absolute;left:16px;top:50%;transform:translateY(-50%)}
+select,.field input,.field textarea{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:16px;background:#fff;outline:none;color:var(--ink)}select:focus,.field input:focus,.field textarea:focus{border-color:var(--sage)}.field label{display:block;font-size:13px;font-weight:700;margin:0 0 7px;color:#526052}.field textarea{min-height:92px;resize:vertical}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.full{grid-column:1/-1}
+.chips{display:flex;gap:8px;overflow:auto;padding:2px 0 6px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}.chip{padding:9px 13px;background:var(--card);border:1px solid var(--line);white-space:nowrap;color:var(--muted)}.chip.active{background:var(--sage);color:#fff;border-color:var(--sage)}
+.items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.item{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}.item-photo{aspect-ratio:16/10;background:var(--sage3);display:grid;place-items:center;font-size:42px;overflow:hidden}.item-photo img{width:100%;height:100%;object-fit:cover}.item-body{padding:15px;display:flex;flex-direction:column;gap:8px;flex:1}.item h3{margin:0;font-size:18px}.meta{color:var(--muted);font-size:13px}.price{font-size:19px;font-weight:800}.badge{display:inline-flex;width:max-content;padding:6px 9px;border-radius:999px;background:var(--sage2);font-size:12px;font-weight:700}.badge.shipping{background:#dde8f6}.badge.cancelled{background:#f7dddd}.badge.researching{background:#f7edd0}.badge.purchased{background:#e4e1f7}.item-actions{display:flex;gap:8px;margin-top:auto}.item-actions button{flex:1}
+.empty{padding:38px 18px;text-align:center;background:var(--card);border:1px dashed #d4d0c8;border-radius:24px;color:var(--muted)}
+.section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:22px 0 12px}.section-title h2{margin:0;font-size:22px}.category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.cat{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:var(--shadow)}.cat .emoji{font-size:30px}.cat strong{display:block;margin:8px 0 4px}.cat small{color:var(--muted)}
+.bottomnav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,760px);height:var(--nav);padding:8px max(12px,env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));background:rgba(255,253,248,.94);backdrop-filter:blur(14px);border-top:1px solid var(--line);display:flex;justify-content:space-around;z-index:20}.navbtn{border:0;background:transparent;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;min-width:60px}.navbtn span{font-size:21px}.navbtn.active{color:var(--sage);font-weight:800}.fab{width:54px;height:54px;border-radius:18px;background:var(--sage);color:#fff;border:0;font-size:28px;box-shadow:0 9px 20px rgba(89,119,83,.28)}
+.page{display:none}.page.active{display:block}.desktopnav{display:none}
+.modal{position:fixed;inset:0;background:rgba(27,34,28,.42);z-index:50;display:grid;place-items:end center;padding-top:30px}.sheet{background:var(--bg);width:min(760px,100%);max-height:94vh;border-radius:30px 30px 0 0;overflow:auto;padding:18px 18px calc(22px + env(safe-area-inset-bottom));box-shadow:0 -20px 60px rgba(0,0,0,.16)}.sheet-head{position:sticky;top:-18px;background:rgba(246,242,233,.95);backdrop-filter:blur(10px);display:flex;justify-content:space-between;align-items:center;padding:18px 0 12px;z-index:3}.sheet h2{margin:0}.form-actions{display:flex;gap:10px;position:sticky;bottom:-22px;background:linear-gradient(transparent,var(--bg) 35%);padding:28px 0 4px}.form-actions>*{flex:1}
+.photo-preview{width:100%;aspect-ratio:16/8;border:1px dashed #c9c5bb;border-radius:18px;background:var(--card);display:grid;place-items:center;overflow:hidden;color:var(--muted)}.photo-preview img{width:100%;height:100%;object-fit:cover}.spec-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-top:8px}.listrow{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}.notice{background:#fff5dd;border:1px solid #f0dfb6;border-radius:18px;padding:14px;font-size:13px;color:#765f28}.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:#263229;color:#fff;padding:11px 16px;border-radius:999px;z-index:100;box-shadow:var(--shadow);max-width:90%;text-align:center}.muted{color:var(--muted)}.money-positive{color:#587a53}
+@media(max-width:850px){.stats{grid-template-columns:repeat(2,1fr)}.items{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.app{padding:14px 12px calc(var(--nav) + 25px)}.top{align-items:flex-start}.logo{width:44px;height:44px}.stats{gap:9px}.stat{padding:14px;border-radius:18px}.items{grid-template-columns:1fr}.toolbar{grid-template-columns:1fr 1fr}.toolbar .search{grid-column:1/-1}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.sheet{padding-left:14px;padding-right:14px}.spec-row{grid-template-columns:1fr 1fr auto}}
+@media(min-width:980px){body{padding-left:210px}.desktopnav{display:flex;position:fixed;left:0;top:0;bottom:0;width:210px;background:var(--card);border-right:1px solid var(--line);padding:24px 14px;flex-direction:column;gap:8px}.desktopnav .dn-title{font-weight:900;font-size:18px;padding:8px 10px 20px}.desktopnav button{border:0;background:transparent;padding:13px 14px;border-radius:14px;text-align:left;color:var(--muted)}.desktopnav button.active{background:var(--sage2);color:var(--ink);font-weight:800}.bottomnav{display:none}.app{padding-bottom:38px}.modal{place-items:center}.sheet{border-radius:30px;max-height:90vh}}
+</style>
+</head>
+<body>
+<nav class="desktopnav">
+  <div class="dn-title">🏠 Nosso Enxoval</div>
+  <button data-page="home" class="active">🏠 Início</button>
+  <button data-page="items">☷ Itens</button>
+  <button data-page="categories">📁 Categorias</button>
+  <button data-page="settings">⚙️ Configurações</button>
+</nav>
+
+<main class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="logo">🏠</div>
+      <div><h1>Nosso Enxoval</h1><div class="subtitle">David & Bruna</div></div>
+    </div>
+    <button class="iconbtn" id="refreshBtn" title="Atualizar">↻</button>
+  </header>
+
+  <section id="page-home" class="page active">
+    <div class="progress-card">
+      <div class="row" style="justify-content:space-between"><strong>Progresso do enxoval</strong><strong id="progressText">0%</strong></div>
+      <div class="progress-track"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+      <div class="muted" style="margin-top:8px;font-size:13px" id="progressSub">Comecem adicionando o primeiro item ✨</div>
+    </div>
+    <div class="grid stats">
+      <div class="stat"><small>Itens</small><b id="statItems">0</b></div>
+      <div class="stat"><small>Comprados</small><b id="statBought">0</b></div>
+      <div class="stat"><small>Faltam</small><b id="statMissing">0</b></div>
+      <div class="stat"><small>Gasto</small><b id="statSpent">R$ 0</b></div>
+    </div>
+    <div class="section-title"><h2>Visão geral</h2><button class="primary" onclick="openItem()">＋ Adicionar item</button></div>
+    <div class="chips" id="homeChips"></div>
+    <div id="homeItems" class="items" style="margin-top:12px"></div>
+  </section>
+
+  <section id="page-items" class="page">
+    <div class="section-title"><h2>Todos os itens</h2><button class="primary" onclick="openItem()">＋ Novo</button></div>
+    <div class="toolbar">
+      <div class="search"><span>⌕</span><input id="searchInput" placeholder="Pesquisar item, marca ou loja..."></div>
+      <select id="statusFilter">
+        <option value="">Todos os status</option>
+        <option value="wishlist">Quero comprar</option><option value="researching">Pesquisando</option>
+        <option value="purchased">Comprado</option><option value="shipping">A caminho</option>
+        <option value="delivered">Entregue</option><option value="cancelled">Cancelado</option>
+      </select>
+      <select id="sortFilter">
+        <option value="newest">Mais recentes</option><option value="name">Nome A–Z</option>
+        <option value="price-high">Maior valor</option><option value="price-low">Menor valor</option>
+      </select>
+    </div>
+    <div class="chips" id="itemChips"></div>
+    <div id="allItems" class="items" style="margin-top:12px"></div>
+  </section>
+
+  <section id="page-categories" class="page">
+    <div class="section-title"><h2>Categorias</h2><button class="primary" onclick="openCategory()">＋ Nova categoria</button></div>
+    <div id="categoryGrid" class="category-grid"></div>
+  </section>
+
+  <section id="page-settings" class="page">
+    <div class="section-title"><h2>Configurações</h2></div>
+    <div class="cat">
+      <strong>🏷️ Campos personalizados</strong>
+      <div class="muted" style="margin:6px 0 14px">Crie características que podem aparecer no cadastro dos itens.</div>
+      <div id="fieldList"></div>
+      <button class="ghost" onclick="openField()">＋ Novo campo</button>
+    </div>
+    <div class="cat" style="margin-top:12px">
+      <strong>💾 Backup dos dados</strong>
+      <div class="muted" style="margin:6px 0 14px">Baixe uma cópia ou restaure um backup do Nosso Enxoval.</div>
+      <div class="row">
+        <button class="ghost" onclick="exportBackup()">⬇ Exportar backup</button>
+        <label class="ghost" style="cursor:pointer">⬆ Importar backup<input id="importFile" type="file" accept=".json,application/json" hidden></label>
+      </div>
+    </div>
+    <div class="cat" style="margin-top:12px">
+      <strong>ℹ️ Nosso Enxoval</strong>
+      <div class="muted" style="margin-top:6px">Lista compartilhada de David & Bruna. Sem login, leve e sincronizada pelo Supabase.</div>
+    </div>
+  </section>
+</main>
+
+<nav class="bottomnav">
+  <button class="navbtn active" data-page="home"><span>🏠</span>Início</button>
+  <button class="navbtn" data-page="items"><span>☷</span>Itens</button>
+  <button class="fab" onclick="openItem()" aria-label="Adicionar">＋</button>
+  <button class="navbtn" data-page="categories"><span>📁</span>Categorias</button>
+  <button class="navbtn" data-page="settings"><span>⚙️</span>Mais</button>
+</nav>
+
+<div id="itemModal" class="modal hidden">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="itemModalTitle">Novo item</h2><button class="iconbtn" onclick="closeModal('itemModal')">✕</button></div>
+    <form id="itemForm" class="formgrid">
+      <input type="hidden" id="itemId">
+      <div class="field full"><label>Nome *</label><input id="fName" required placeholder="Ex.: Liquidificador"></div>
+      <div class="field"><label>Categoria</label><select id="fCategory"></select></div>
+      <div class="field"><label>Status</label><select id="fStatus">
+        <option value="wishlist">Quero comprar</option><option value="researching">Pesquisando</option>
+        <option value="purchased">Comprado</option><option value="shipping">A caminho</option>
+        <option value="delivered">Entregue</option><option value="cancelled">Cancelado</option>
+      </select></div>
+      <div class="field"><label>Quantidade</label><input id="fQty" type="number" min="1" value="1"></div>
+      <div class="field"><label>Prioridade</label><select id="fPriority"><option value="low">Baixa</option><option value="normal" selected>Normal</option><option value="high">Alta</option></select></div>
+      <div class="field"><label>Valor previsto</label><input id="fExpected" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>Valor pago</label><input id="fPaid" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>Frete</label><input id="fShipping" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>Desconto</label><input id="fDiscount" inputmode="decimal" placeholder="0,00"></div>
+      <div class="field"><label>Loja</label><input id="fStore" placeholder="Ex.: Mercado Livre"></div>
+      <div class="field"><label>Data da compra</label><input id="fDate" type="date"></div>
+      <div class="field full"><label>Link do produto</label><input id="fUrl" type="url" placeholder="https://..."></div>
+      <div class="field"><label>Marca</label><input id="fBrand"></div>
+      <div class="field"><label>Modelo</label><input id="fModel"></div>
+      <div class="field"><label>Cor</label><input id="fColor"></div>
+      <div class="field"><label>Voltagem</label><input id="fVoltage" placeholder="Ex.: 110V / 220V / Bivolt"></div>
+      <div class="field full"><label>Foto</label><div id="photoPreview" class="photo-preview">Nenhuma foto</div><input id="fPhoto" type="file" accept="image/*" style="margin-top:8px"><button type="button" class="ghost" style="margin-top:8px" onclick="removePhoto()">Remover foto</button></div>
+      <div class="field full"><label>Características</label><div id="defaultSpecs"></div><div id="extraSpecs"></div><button type="button" class="ghost" style="margin-top:8px" onclick="addSpecRow()">＋ Outra informação</button></div>
+      <div class="field full"><label>Observações</label><textarea id="fNotes" placeholder="Detalhes, medidas, garantia, entrega..."></textarea></div>
+      <div class="field full"><label><input id="fFavorite" type="checkbox" style="width:auto;margin-right:7px"> Marcar como favorito</label></div>
+      <div class="form-actions full"><button type="button" id="deleteItemBtn" class="danger hidden" onclick="deleteCurrentItem()">Excluir</button><button class="primary" type="submit">Salvar item</button></div>
+    </form>
+  </div>
+</div>
+
+<div id="categoryModal" class="modal hidden">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="catModalTitle">Nova categoria</h2><button class="iconbtn" onclick="closeModal('categoryModal')">✕</button></div>
+    <form id="catForm" class="formgrid">
+      <input id="catId" type="hidden">
+      <div class="field"><label>Ícone</label><input id="catIcon" value="🏠" maxlength="8"></div>
+      <div class="field"><label>Nome *</label><input id="catName" required></div>
+      <div class="form-actions full"><button type="button" id="deleteCatBtn" class="danger hidden" onclick="deleteCurrentCategory()">Excluir</button><button class="primary">Salvar categoria</button></div>
+    </form>
+  </div>
+</div>
+
+<div id="fieldModal" class="modal hidden">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="fieldModalTitle">Novo campo</h2><button class="iconbtn" onclick="closeModal('fieldModal')">✕</button></div>
+    <form id="fieldForm" class="formgrid">
+      <input id="fieldId" type="hidden">
+      <div class="field full"><label>Nome do campo *</label><input id="fieldLabel" required placeholder="Ex.: Potência"></div>
+      <div class="field full"><label>Exemplo / dica</label><input id="fieldPlaceholder" placeholder="Ex.: 550 W"></div>
+      <div class="form-actions full"><button type="button" id="deleteFieldBtn" class="danger hidden" onclick="deleteCurrentField()">Excluir</button><button class="primary">Salvar campo</button></div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script>
+const SUPABASE_URL="https://cfpcxqzqkevyqcfhddnp.supabase.co";
+const SUPABASE_KEY="sb_publishable_-DQ4VDQImufVeozYFhX0DQ_d4rVlYcA";
+const API=SUPABASE_URL+"/rest/v1";
+const state={items:[],categories:[],fields:[],catFilter:"",photoData:null};
+const statusLabel={wishlist:"Quero comprar",researching:"Pesquisando",purchased:"Comprado",shipping:"A caminho",delivered:"Entregue",cancelled:"Cancelado"};
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+const headers=(extra={})=>({"apikey":SUPABASE_KEY,"Content-Type":"application/json",...extra});
+function esc(v=""){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function money(v){return new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"}).format(Number(v||0))}
+function num(v){if(v===null||v===undefined||v==="")return null; const n=Number(String(v).replace(/\./g,"").replace(",","."));return Number.isFinite(n)?n:null}
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.remove("hidden");clearTimeout(window.__tt);window.__tt=setTimeout(()=>t.classList.add("hidden"),2600)}
+async function api(path,opt={}){const r=await fetch(API+path,{...opt,headers:headers(opt.headers||{})});if(!r.ok){const tx=await r.text();throw new Error(tx||("Erro "+r.status))}if(r.status===204)return null;const text=await r.text();return text?JSON.parse(text):null}
+async function loadAll(show=true){try{
+ if(show)$("#refreshBtn").textContent="…";
+ const [cats,fields,items]=await Promise.all([
+   api("/categories?select=*&order=sort_order.asc,name.asc"),
+   api("/custom_fields?select=*&order=sort_order.asc,label.asc"),
+   api("/items?select=*&order=created_at.desc")
+ ]);
+ state.categories=cats||[];state.fields=fields||[];state.items=items||[];renderAll();
+}catch(e){console.error(e);toast("Não foi possível carregar os dados.");}
+finally{$("#refreshBtn").textContent="↻"}}
+function categoryName(id){return state.categories.find(c=>c.id===id)?.name||"Sem categoria"}
+function catIcon(id){return state.categories.find(c=>c.id===id)?.icon||"📦"}
+function itemPaid(i){return ((Number(i.paid_price)||0)*(Number(i.quantity)||1))+(Number(i.shipping_price)||0)-(Number(i.discount)||0)}
+function itemExpected(i){return (Number(i.expected_price)||0)*(Number(i.quantity)||1)}
+function isBought(i){return ["purchased","shipping","delivered"].includes(i.status)}
+function isDone(i){return i.status==="delivered"}
+function renderAll(){renderStats();renderChips();renderItems();renderCategories();renderFields();fillCategorySelect()}
+function renderStats(){
+ const valid=state.items.filter(i=>i.status!=="cancelled"),total=valid.reduce((s,i)=>s+(Number(i.quantity)||1),0);
+ const bought=valid.filter(isBought).reduce((s,i)=>s+(Number(i.quantity)||1),0), missing=Math.max(0,total-bought);
+ const spent=valid.filter(isBought).reduce((s,i)=>s+itemPaid(i),0); const pct=total?Math.round((bought/total)*100):0;
+ $("#statItems").textContent=total;$("#statBought").textContent=bought;$("#statMissing").textContent=missing;$("#statSpent").textContent=money(spent);
+ $("#progressText").textContent=pct+"%";$("#progressFill").style.width=pct+"%";
+ $("#progressSub").textContent=total?bought+" de "+total+" itens já comprados":"Comecem adicionando o primeiro item ✨";
+}
+function renderChips(){
+ const make=(target)=>{let h='<button class="chip '+(state.catFilter===""?"active":"")+'" onclick="setCatFilter(\'\')">Todos</button>';
+ state.categories.forEach(c=>h+='<button class="chip '+(state.catFilter===c.id?"active":"")+'" onclick="setCatFilter(\''+c.id+'\')">'+esc(c.icon)+" "+esc(c.name)+"</button>");$(target).innerHTML=h};
+ make("#homeChips");make("#itemChips");
+}
+function setCatFilter(id){state.catFilter=id;renderChips();renderItems()}
+function filteredItems(){
+ let arr=[...state.items]; const q=$("#searchInput")?.value.trim().toLowerCase()||"",st=$("#statusFilter")?.value||"";
+ if(state.catFilter)arr=arr.filter(i=>i.category_id===state.catFilter); if(st)arr=arr.filter(i=>i.status===st);
+ if(q)arr=arr.filter(i=>[i.name,i.brand,i.model,i.store,categoryName(i.category_id)].some(v=>String(v||"").toLowerCase().includes(q)));
+ const sort=$("#sortFilter")?.value||"newest";
+ if(sort==="name")arr.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
+ if(sort==="price-high")arr.sort((a,b)=>(b.paid_price||b.expected_price||0)-(a.paid_price||a.expected_price||0));
+ if(sort==="price-low")arr.sort((a,b)=>(a.paid_price||a.expected_price||0)-(b.paid_price||b.expected_price||0));
+ return arr
+}
+function card(i){
+ const img=i.photo_data?'<img src="'+i.photo_data+'" alt="">':esc(catIcon(i.category_id));
+ const val=i.paid_price!=null?money(itemPaid(i)):i.expected_price!=null?money(itemExpected(i)):"Valor não informado";
+ const sub=[i.brand,i.model,i.color,i.voltage].filter(Boolean).map(esc).join(" • ");
+ return '<article class="item"><div class="item-photo">'+img+'</div><div class="item-body">'+
+ '<div class="row" style="justify-content:space-between"><span class="badge '+i.status+'">'+statusLabel[i.status]+'</span>'+(i.favorite?"<span>♥</span>":"")+'</div>'+
+ '<h3>'+esc(i.name)+'</h3><div class="meta">'+esc(categoryName(i.category_id))+(sub?" · "+sub:"")+'</div>'+
+ '<div class="price">'+val+'</div>'+(i.store?'<div class="meta">🛍️ '+esc(i.store)+'</div>':"")+
+ '<div class="item-actions">'+(i.product_url?'<button class="ghost" onclick="window.open(\''+esc(i.product_url)+'\',\'_blank\')">Abrir link</button>':"")+
+ '<button class="ghost" onclick="openItem(\''+i.id+'\')">Editar</button></div></div></article>';
+}
+function renderItems(){
+ const arr=filteredItems();$("#allItems").innerHTML=arr.length?arr.map(card).join(""):'<div class="empty" style="grid-column:1/-1">Nenhum item encontrado.</div>';
+ const home=arr.slice(0,6);$("#homeItems").innerHTML=home.length?home.map(card).join(""):'<div class="empty" style="grid-column:1/-1">A lista ainda está vazia. Toque em <b>Adicionar item</b> para começar.</div>';
+}
+function renderCategories(){
+ $("#categoryGrid").innerHTML=state.categories.map(c=>{const its=state.items.filter(i=>i.category_id===c.id&&i.status!=="cancelled"),b=its.filter(isBought).length;return '<div class="cat" onclick="openCategory(\''+c.id+'\')"><div class="emoji">'+esc(c.icon)+'</div><strong>'+esc(c.name)+'</strong><small>'+its.length+' itens · '+b+' comprados</small></div>'}).join("")||'<div class="empty">Nenhuma categoria.</div>';
+}
+function renderFields(){
+ $("#fieldList").innerHTML=state.fields.map(f=>'<div class="listrow"><div><strong>'+esc(f.label)+'</strong><div class="muted" style="font-size:12px">'+esc(f.placeholder||"Sem exemplo")+'</div></div><button class="ghost" onclick="openField(\''+f.id+'\')">Editar</button></div>').join("")||'<div class="muted" style="margin-bottom:12px">Nenhum campo personalizado.</div>';
+}
+function fillCategorySelect(){$("#fCategory").innerHTML='<option value="">Sem categoria</option>'+state.categories.map(c=>'<option value="'+c.id+'">'+esc(c.icon)+" "+esc(c.name)+'</option>').join("")}
+function navigate(page){$$(".page").forEach(p=>p.classList.toggle("active",p.id==="page-"+page));$$("[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===page));window.scrollTo({top:0,behavior:"smooth"})}
+$$("[data-page]").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.page)));
+$("#refreshBtn").addEventListener("click",()=>loadAll());
+["searchInput","statusFilter","sortFilter"].forEach(id=>$("#"+id)?.addEventListener(id==="searchInput"?"input":"change",renderItems));
+function closeModal(id){$("#"+id).classList.add("hidden")}
+function openItem(id=null){
+ $("#itemForm").reset();$("#fQty").value=1;$("#fPriority").value="normal";$("#fStatus").value="wishlist";$("#itemId").value="";state.photoData=null;
+ $("#photoPreview").innerHTML="Nenhuma foto";$("#extraSpecs").innerHTML="";$("#deleteItemBtn").classList.add("hidden");$("#itemModalTitle").textContent="Novo item";
+ renderDefaultSpecs({});
+ if(id){const i=state.items.find(x=>x.id===id);if(!i)return;$("#itemId").value=i.id;$("#itemModalTitle").textContent="Editar item";$("#deleteItemBtn").classList.remove("hidden");
+   $("#fName").value=i.name||"";$("#fCategory").value=i.category_id||"";$("#fStatus").value=i.status||"wishlist";$("#fQty").value=i.quantity||1;$("#fPriority").value=i.priority||"normal";
+   $("#fExpected").value=i.expected_price??"";$("#fPaid").value=i.paid_price??"";$("#fShipping").value=i.shipping_price??"";$("#fDiscount").value=i.discount??"";
+   $("#fStore").value=i.store||"";$("#fDate").value=i.purchase_date||"";$("#fUrl").value=i.product_url||"";$("#fBrand").value=i.brand||"";$("#fModel").value=i.model||"";$("#fColor").value=i.color||"";$("#fVoltage").value=i.voltage||"";$("#fNotes").value=i.notes||"";$("#fFavorite").checked=!!i.favorite;
+   state.photoData=i.photo_data||null;if(state.photoData)$("#photoPreview").innerHTML='<img src="'+state.photoData+'">';
+   renderDefaultSpecs(i.specs||{});
+ }
+ $("#itemModal").classList.remove("hidden")
+}
+function renderDefaultSpecs(specs){
+ const used=new Set(state.fields.map(f=>f.label));$("#defaultSpecs").innerHTML=state.fields.map(f=>'<div class="spec-row"><input class="spec-key" value="'+esc(f.label)+'" readonly><input class="spec-val" placeholder="'+esc(f.placeholder||"Valor")+'" value="'+esc(specs[f.label]||"")+'"><span></span></div>').join("");
+ Object.entries(specs).filter(([k])=>!used.has(k)).forEach(([k,v])=>addSpecRow(k,v))
+}
+function addSpecRow(k="",v=""){const d=document.createElement("div");d.className="spec-row";d.innerHTML='<input class="spec-key" placeholder="Ex.: Largura" value="'+esc(k)+'"><input class="spec-val" placeholder="Valor" value="'+esc(v)+'"><button type="button" class="iconbtn" onclick="this.parentElement.remove()">✕</button>';$("#extraSpecs").appendChild(d)}
+function collectSpecs(){const o={};$$(".spec-row").forEach(r=>{const k=r.querySelector(".spec-key")?.value.trim(),v=r.querySelector(".spec-val")?.value.trim();if(k&&v)o[k]=v});return o}
+$("#fPhoto").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;try{state.photoData=await compressImage(file);$("#photoPreview").innerHTML='<img src="'+state.photoData+'">'}catch{toast("Não foi possível processar a foto.")}});
+function removePhoto(){state.photoData=null;$("#fPhoto").value="";$("#photoPreview").innerHTML="Nenhuma foto"}
+function compressImage(file){return new Promise((resolve,reject)=>{const rd=new FileReader();rd.onerror=reject;rd.onload=()=>{const img=new Image();img.onerror=reject;img.onload=()=>{let w=img.width,h=img.height,max=1200;if(w>max||h>max){const s=Math.min(max/w,max/h);w=Math.round(w*s);h=Math.round(h*s)}const c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(img,0,0,w,h);resolve(c.toDataURL("image/jpeg",.74))};img.src=rd.result};rd.readAsDataURL(file)})}
+$("#itemForm").addEventListener("submit",async e=>{e.preventDefault();const id=$("#itemId").value;const payload={
+ name:$("#fName").value.trim(),category_id:$("#fCategory").value||null,status:$("#fStatus").value,quantity:Math.max(1,Number($("#fQty").value)||1),priority:$("#fPriority").value,
+ expected_price:num($("#fExpected").value),paid_price:num($("#fPaid").value),shipping_price:num($("#fShipping").value),discount:num($("#fDiscount").value),
+ store:$("#fStore").value.trim()||null,purchase_date:$("#fDate").value||null,product_url:$("#fUrl").value.trim()||null,brand:$("#fBrand").value.trim()||null,model:$("#fModel").value.trim()||null,color:$("#fColor").value.trim()||null,voltage:$("#fVoltage").value.trim()||null,
+ notes:$("#fNotes").value.trim()||null,favorite:$("#fFavorite").checked,specs:collectSpecs(),photo_data:state.photoData,updated_at:new Date().toISOString()
+ };try{if(id)await api("/items?id=eq."+id,{method:"PATCH",headers:{"Prefer":"return=minimal"},body:JSON.stringify(payload)});else await api("/items",{method:"POST",headers:{"Prefer":"return=minimal"},body:JSON.stringify(payload)});closeModal("itemModal");toast(id?"Item atualizado.":"Item adicionado.");await loadAll(false)}catch(err){console.error(err);toast("Erro ao salvar item.")}});
+async function deleteCurrentItem(){const id=$("#itemId").value;if(!id||!confirm("Excluir este item?"))return;try{await api("/items?id=eq."+id,{method:"DELETE"});closeModal("itemModal");toast("Item excluído.");await loadAll(false)}catch(e){toast("Erro ao excluir.")}}
+function openCategory(id=null){$("#catForm").reset();$("#catId").value="";$("#catIcon").value="🏠";$("#deleteCatBtn").classList.add("hidden");$("#catModalTitle").textContent="Nova categoria";if(id){const c=state.categories.find(x=>x.id===id);if(!c)return;$("#catId").value=c.id;$("#catName").value=c.name;$("#catIcon").value=c.icon;$("#deleteCatBtn").classList.remove("hidden");$("#catModalTitle").textContent="Editar categoria"}$("#categoryModal").classList.remove("hidden")}
+$("#catForm").addEventListener("submit",async e=>{e.preventDefault();const id=$("#catId").value,p={name:$("#catName").value.trim(),icon:$("#catIcon").value.trim()||"🏠"};try{if(id)await api("/categories?id=eq."+id,{method:"PATCH",body:JSON.stringify(p)});else await api("/categories",{method:"POST",body:JSON.stringify(p)});closeModal("categoryModal");toast("Categoria salva.");await loadAll(false)}catch{toast("Não foi possível salvar. Talvez esse nome já exista.")}});
+async function deleteCurrentCategory(){const id=$("#catId").value;if(!id||!confirm("Excluir esta categoria? Os itens ficarão sem categoria."))return;try{await api("/categories?id=eq."+id,{method:"DELETE"});closeModal("categoryModal");toast("Categoria excluída.");await loadAll(false)}catch{toast("Erro ao excluir categoria.")}}
+function openField(id=null){$("#fieldForm").reset();$("#fieldId").value="";$("#deleteFieldBtn").classList.add("hidden");$("#fieldModalTitle").textContent="Novo campo";if(id){const f=state.fields.find(x=>x.id===id);if(!f)return;$("#fieldId").value=f.id;$("#fieldLabel").value=f.label;$("#fieldPlaceholder").value=f.placeholder||"";$("#deleteFieldBtn").classList.remove("hidden");$("#fieldModalTitle").textContent="Editar campo"}$("#fieldModal").classList.remove("hidden")}
+$("#fieldForm").addEventListener("submit",async e=>{e.preventDefault();const id=$("#fieldId").value,p={label:$("#fieldLabel").value.trim(),placeholder:$("#fieldPlaceholder").value.trim()||null};try{if(id)await api("/custom_fields?id=eq."+id,{method:"PATCH",body:JSON.stringify(p)});else await api("/custom_fields",{method:"POST",body:JSON.stringify(p)});closeModal("fieldModal");toast("Campo salvo.");await loadAll(false)}catch{toast("Não foi possível salvar o campo.")}});
+async function deleteCurrentField(){const id=$("#fieldId").value;if(!id||!confirm("Excluir este campo das configurações? Valores já salvos nos itens não serão apagados."))return;try{await api("/custom_fields?id=eq."+id,{method:"DELETE"});closeModal("fieldModal");toast("Campo excluído.");await loadAll(false)}catch{toast("Erro ao excluir campo.")}}
+function exportBackup(){const blob=new Blob([JSON.stringify({version:1,exported_at:new Date().toISOString(),categories:state.categories,fields:state.fields,items:state.items},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="nosso-enxoval-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();URL.revokeObjectURL(a.href)}
+$("#importFile").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!confirm("Importar este backup e mesclar com os dados atuais?"))return;
+ for(const [table,arr] of [["categories",data.categories],["custom_fields",data.fields],["items",data.items]])if(Array.isArray(arr)&&arr.length)await api("/"+table+"?on_conflict=id",{method:"POST",headers:{"Prefer":"resolution=merge-duplicates,return=minimal"},body:JSON.stringify(arr)});
+ toast("Backup importado.");await loadAll(false)}catch(err){console.error(err);toast("Arquivo de backup inválido.")}finally{e.target.value=""}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$$(".modal").forEach(m=>m.classList.add("hidden"))});
+loadAll();
+</script>
+</body>
+</html>
