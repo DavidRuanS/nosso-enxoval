@@ -1,0 +1,31 @@
+name: Keep Supabase Active
+
+on:
+  schedule:
+    - cron: "17 10 */3 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ping Supabase
+        run: |
+          curl --fail --silent --show-error \
+            "https://cfpcxqzqkevyqcfhddnp.supabase.co/rest/v1/categories?select=id&limit=1" \
+            -H "apikey: sb_publishable_-DQ4VDQImufVeozYFhX0DQ_d4rVlYcA" \
+            > /dev/null
+
+      - name: Keep repository active
+        run: |
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .keepalive
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .keepalive
+          git diff --cached --quiet || git commit -m "chore: keep project active"
+          git push
