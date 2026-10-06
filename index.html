@@ -227,12 +227,12 @@ function isBought(i){return ["purchased","shipping","delivered","gifted"].includ
 function isDone(i){return i.status==="delivered"}
 function renderAll(){renderStats();renderChips();renderItems();renderCategories();renderFields();fillCategorySelect()}
 function renderStats(){
- const valid=state.items.filter(i=>i.status!=="cancelled"),total=valid.reduce((s,i)=>s+(Number(i.quantity)||1),0);
- const bought=valid.filter(isBought).reduce((s,i)=>s+(Number(i.quantity)||1),0), missing=Math.max(0,total-bought);
+ const valid=state.items.filter(i=>i.status!=="cancelled"),total=valid.length;
+ const bought=valid.filter(isBought).length, missing=Math.max(0,total-bought);
  const spent=valid.filter(isBought).reduce((s,i)=>s+itemPaid(i),0); const pct=total?Math.round((bought/total)*100):0;
  $("#statItems").textContent=total;$("#statBought").textContent=bought;$("#statMissing").textContent=missing;$("#statSpent").textContent=money(spent);
  $("#progressText").textContent=pct+"%";$("#progressFill").style.width=pct+"%";
- $("#progressSub").textContent=total?bought+" de "+total+" itens já adquiridos":"Comecem adicionando o primeiro item ✨";
+ $("#progressSub").textContent=total?bought+" de "+total+" itens da lista já adquiridos":"Comecem adicionando o primeiro item ✨";
 }
 function renderChips(){
  const make=(target)=>{let h='<button class="chip '+(state.catFilter===""?"active":"")+'" onclick="setCatFilter(\'\')">Todos</button>';
@@ -256,7 +256,7 @@ function card(i){
  const sub=[i.brand,i.model,i.color,i.voltage].filter(Boolean).map(esc).join(" • ");
  return '<article class="item"><div class="item-photo">'+img+'</div><div class="item-body">'+
  '<div class="row" style="justify-content:space-between"><span class="badge '+i.status+'">'+statusLabel[i.status]+'</span><span>'+(paths.length>1?'<span class="photo-count">📷 '+paths.length+'</span> ':'')+(i.favorite?"♥":"")+'</span></div>'+
- '<h3>'+esc(i.name)+'</h3><div class="meta">'+esc(categoryName(i.category_id))+(sub?" · "+sub:"")+'</div>'+
+ '<h3>'+esc(i.name)+'</h3><div class="meta">'+esc(categoryName(i.category_id))+(Number(i.quantity)>1?" · Qtd. "+Number(i.quantity):"")+(sub?" · "+sub:"")+'</div>'+
  '<div class="price">'+val+'</div>'+(i.store?'<div class="meta">🛍️ '+esc(i.store)+'</div>':"")+
  '<div class="item-actions">'+(i.product_url?'<button class="ghost" onclick="window.open(\''+esc(i.product_url)+'\',\'_blank\')">Abrir link</button>':"")+
  '<button class="ghost" onclick="openItem(\''+i.id+'\')">Editar</button></div></div></article>';
